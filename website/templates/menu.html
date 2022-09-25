@@ -11,19 +11,16 @@
                     {% for j in menuitems %}
                     {% if i.id == j.categoryID %}
                     <div class="menu-item">
-
-                        <img class="menu-item-image" src="./static/menu-upload/Tossed_Mung_Clear_Noodles_with_Homemade_Sauce.jpg" alt={{j.item_name}}>
+                        <img class="menu-item-image" src={{url_for('static', filename="menu-upload/" + j.image)}} alt=j.item_name/>
                         <div class="menu-item-text">
                             <h3 class="menu-item-heading">
                             <span class="menu-item-name">{{j.item_name}} {{j.item_name_cn}}</span>
-                            <!-- <span class="menu-item-name">{{j.item_name_cn}}</span> -->
                             <span class="menu-item-price">{{j.price}}</span>
                             </h3>
                             <p class="menu-item-description">
                                 {{j.description}}
                             </p>
                         </div>
-
                     </div>
                     {% endif %}
                     {% endfor %}

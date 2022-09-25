@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, flash, jsonify, url_for
+from flask import Blueprint, render_template, request, redirect, flash, jsonify, url_for, current_app
 from flask_login import login_required, current_user 
 from sqlalchemy import inspect
 from . import db 
@@ -34,7 +34,7 @@ def about_us():
 def menu():
     menucategory = MenuCategory.query.all()
     menuitems = Menu.query.all()
-    return render_template('menu.html', menucategory=menucategory,menuitems=menuitems)
+    return render_template('menu.html', menucategory=menucategory,menuitems=menuitems, image_loc = current_app.config['UPLOAD_FOLDER'])
 
 
 @views.route('/delete-note', methods=['POST'])
