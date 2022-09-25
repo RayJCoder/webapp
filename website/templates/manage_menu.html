@@ -1,0 +1,75 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<h3 align="center">Menu Management</h3>
+<form method="POST" enctype=multipart/form-data>
+    <label for="item_name">Item Name</label><br />
+    <input type="text" id="item_name" name="item_name" >
+    <br /><br />
+    <label for="item_name_cn">Chinese Item Name</label><br />
+    <input type="text" id="item_name_cn" name="item_name_cn" >
+    <br /><br />
+    <label for="price">Price</label><br />
+    <input type="number" step="0.01" id="price" name="price" >
+    <br /><br />
+    <label for="categoryID">Choose Category</label><br />
+    <select id="categoryID" name="categoryID">
+        {% for category in menucategory %}
+            <option value="{{category.id}}">{{category.category}}</option>
+        {% endfor %}
+    </select>
+    <br /><br />
+    <label for="image">Select Image</label><br />
+    <input type="file" id="image" name="image">
+    <br /><br />
+    <label for="description">Add Description</label><br />
+    <textarea id="description" name="description" class="form-control"></textarea>
+    <br /><br />
+
+    <button type="submit" name='ADD' class="btn btn-primary">Add</button> 
+    <button type="submit" name='DELETE' class="btn btn-primary">Delete</button> 
+    
+</form>
+<br/><br/>
+
+<table class="table">
+    <tr>
+        <th>CategoryID</th>
+        <th>ID</th>
+        <th>Item Name</th>
+        <th>Chinese Item Name</th>
+        <th>Price</th>
+        <th>ImageName</th>
+        <th>Description</th>
+    </tr>
+    {% if menuitems %}
+    {% for i in menucategory %}
+        {% for j in menuitems %}
+            {% if i.id == j.categoryID %}
+            <tr>
+                <td>{{i.category}}</td>
+                <td>{{j.id}}</td>
+                <td>{{j.item_name}}</td>
+                <td>{{j.item_name_cn}}</td>
+                <td>{{j.price}}</td>
+                <td>{{j.image}}</td>
+                <td>{{j.description}}</td>
+            </tr>
+            {% endif %}
+
+        {% endfor %}
+    {% endfor %}
+    {% else %}
+        <tr>
+            <td>Please add new record</td>thtd
+        </tr>
+
+    {% endif %}
+
+</table>
+
+
+
+{% endblock %}
+

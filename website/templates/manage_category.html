@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h3 align="center">Category Management</h3>
+<form method="POST">
+    <label for="category_name">Category name</label><br />
+    <input type="text" id="category_name" name="category_name" placeholder="Enter name">
+    <br />
+    <label for="category_name_cn">Chinese Category Name</label><br />
+    <input type="text" id="category_name_cn" name="category_name_cn" placeholder="Enter Chinese name">
+    <br />
+    <button type="submit" name='ADD' class="btn btn-primary">Add</button> 
+    <button type="submit" name='DELETE' class="btn btn-primary">Delete</button> 
+    
+</form>
+<br/>
+<ul class="list-group list-group-flush" id="categories">
+    <h3>List of Categories</h3>
+    {% if menucategory %}
+    {% for c in menucategory %}
+    <li class="list-group-item">
+        {{c.id}}
+        {{c.category}}
+        {{c.category_cn}}
+    </li>
+    {% endfor %}
+    {% else %}
+    <p>Add a new category using field above</p>
+    {% endif %}
+</ul>
+
+
+
+{% endblock %}

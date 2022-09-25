@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="menu">
+        {% for i in menucategory %}
+            <h2 class="menu-group-heading">
+                {{i.category}} {{i.category_cn}}
+            </h2>
+                <div class="menu-group">
+                    {% for j in menuitems %}
+                    {% if i.id == j.categoryID %}
+                    <div class="menu-item">
+
+                        <img class="menu-item-image" src="./static/menu-upload/Tossed_Mung_Clear_Noodles_with_Homemade_Sauce.jpg" alt={{j.item_name}}>
+                        <div class="menu-item-text">
+                            <h3 class="menu-item-heading">
+                            <span class="menu-item-name">{{j.item_name}} {{j.item_name_cn}}</span>
+                            <!-- <span class="menu-item-name">{{j.item_name_cn}}</span> -->
+                            <span class="menu-item-price">{{j.price}}</span>
+                            </h3>
+                            <p class="menu-item-description">
+                                {{j.description}}
+                            </p>
+                        </div>
+
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
