@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+{% block head %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bs/css/flatly.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="col-lg-8">
+		<h3 class="bold">
+			<i class="glyphicon glyphicon-shopping-cart"></i> Your Shopping Cart
+		</h3>
+
+		<div class="panel panel-primary">
+			<div class="panel-body">
+                {% if items %}
+				{% for item in items %}
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<div class="thumbnail thumbnail-q">
+								<img src={{url_for('static', filename="menu-upload/" + item.image)}} alt=j.item_name/>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<h3 class="bold">{{ item['item_name'] }} {{ item['item_name_cn'] }}</h3>
+						<br />
+
+
+					</div>
+					<div class="col-lg-2">
+						<h3>Quantity</h3>
+						<p>
+							{{ item['quantity'] }}
+						</p>
+                        <p>
+							<a href="{{ url_for('views.remove_from_cart', index=item['index']) }}">
+							<button type="button" class="btn btn-danger btn-xs">
+								<i class="glyphicon glyphicon-trash"></i>
+							</button></a>
+						</p>
+					</div>
+					<div class="col-lg-2">
+						<h3>Total</h3>
+						<p>
+							<strong>&dollar;{{ item['total']}}</strong>
+						</p>
+					</div>
+				</div>
+				{% endfor %}
+                {% else %}
+                <p>Empty Cart</p>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+
+    <!-- This is the cart summary page -->
+    <div class="col-lg-4">
+		<h3 class="bold">
+			<i class="glyphicon glyphicon-th-list"></i> Cart Summary
+		</h3>
+
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				Current Cart Value
+			</div>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<p>
+						{{ quantity_total }} Items <strong class="pull-right">&dollar;{{ grand_total }}</strong>
+					</p>
+				</li>
+				<li class="list-group-item">
+					<p>Tax({{SF_TAX_RATE * 100}}%) <strong class="pull-right">&dollar;{{ tax_total }}</strong></p>
+				</li>
+                <li class="list-group-item">
+					<p>Total <strong class="pull-right">&dollar;{{ grand_total_plus_tax }}</strong></p>
+				</li>
+			</ul>
+			<div class="panel-footer">
+				{%if quantity_total>0%}
+				<a href="{{ url_for('views.checkout') }}" class="btn btn-primary btn-sm">
+					Checkout <i class="glyphicon glyphicon-chevron-right"></i>
+				</a>
+				{%else%}
+				<a href="#" class="btn btn-primary btn-sm">
+					Checkout <i class="glyphicon glyphicon-chevron-right"></i>
+				</a>
+				{%endif%}
+				<a href="{{ url_for('views.menu') }}" class="btn btn-link btn-sm pull-right">
+					<i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

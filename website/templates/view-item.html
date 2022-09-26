@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{%  block body %}
+
+
+<div class="col-lg-7">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Item Details</h3>
+        </div>
+        <div class="panel-body">
+            <h3>{{ item.name }} &nbsp;
+            </h3>
+            <h4>&dollar;{{ item.price}}</h4>
+            <hr />
+            {{ item.description }}
+            <hr />
+
+            <form action="{{ url_for('views.add_to_cart') }}" method="POST">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            Quantity
+                        </div>
+                        <div class="col-lg-12">
+                            {{ form.csrf_token }}
+
+                            {{ form.quantity(class='form-control', type='number', min=1, max=10, step=1, value=1) }}
+
+                            {{ form.id(value=item.id) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+
+            <button type="submit" class="btn btn-primary">
+                <i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
+            </button>
+
+        </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

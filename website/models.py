@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     last_name = db.Column(db.String(150))
     notes = db.relationship("Note")
+    cart = db.relationship("Cart")
 
 class Menu(db.Model):
     __tablename__ = "menu"
@@ -37,5 +38,12 @@ class MenuCategory(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     category = db.Column(db.String(150),unique=True)
     category_cn = db.Column(db.String(150),unique=True)
+
+class Cart(db.Model):
+    __tablename__='cart'
+    id = db.Column(db.Integer,primary_key = True)
+    qty = db.Column(db.Integer)
+    UserID = db.Column(db.Integer, db.ForeignKey("user.id"))
+    ItemID = db.Column(db.Integer, db.ForeignKey("menu.id"))
 
 
