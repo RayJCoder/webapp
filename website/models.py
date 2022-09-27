@@ -3,6 +3,7 @@ from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.inspection import inspect
+from sqlalchemy import create_engine, engine
 class Note(db.Model):
     __tablename__ = "note"
     id = db.Column(db.Integer, primary_key=True)
@@ -47,9 +48,9 @@ class Order(db.Model):
     first_name = db.Column(db.String(20))
     last_name = db.Column(db.String(20))
     phone_number = db.Column(db.Integer)
-    email = db.Column(db.String(50))
+    email = db.Column(db.String(20))
     pick_up_time = db.Column(db.String(20))
-    card_number = db.Column(db.String(50))
+    card_number = db.Column(db.String(20))
     card_exp = db.Column(db.String(10))
     card_secure_code = db.Column(db.String(10))
     payment_type = db.Column(db.String(10))
@@ -61,9 +62,3 @@ class OrderDetail(db.Model):
     ItemId = db.Column(db.Integer, db.ForeignKey("menu.id"))
     OrderId = db.Column(db.Integer, db.ForeignKey("order.id"))
     qty = db.Column(db.Integer)
-
-inspect_tb = inspect(OrderDetail)
-for c in inspect_tb.c:
-    print(c.name)
-
-db.Order.drop()

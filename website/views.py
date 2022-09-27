@@ -1,7 +1,7 @@
 from email.mime import image
 from flask import Blueprint, render_template, session, request, redirect, flash, jsonify, url_for, current_app
 from flask_login import login_required, current_user 
-from sqlalchemy import inspect
+from sqlalchemy import inspect,create_engine, engine
 from . import db 
 import json
 from .models import Note, MenuCategory, Menu, Order, OrderDetail
@@ -88,8 +88,9 @@ def handle_cart():
     SF_TAX_RATE = float(0.0975)
     grand_total_plus_tax = 0
     for i in session['cart']:
+        print(i)
         item = Menu.query.filter_by(id=i['id']).first()
-
+        print(f'this is the item : {item}')
         quantity = int(i['quantity'])
         total = quantity * item.price
         tax = SF_TAX_RATE * item.price * quantity
@@ -138,22 +139,28 @@ def checkout():
         order.last_name = form.last_name.data
         order.phone_number = form.phone_number.data
         order.email = form.email.data
-        order.card_number  = form.card_number
-        order.card_exp  = form.card_exp
-        order.card_secure_code  = form.card_secure_code
-        order.payment_type  = form.payment_type
-        order.pick_up_time  = form.pick_up_time
+        order.card_number = form.card_number.data
+        order.card_exp  = form.card_exp.data
+        order.card_secure_code  = form.card_secure_code.data
+        order.payment_type  = form.payment_type.data
+        order.pick_up_time  = form.pick_up_time.data
 
         for item in added_items_detail:
             order_item = OrderDetail(
                 qty = item['quantity'],ItemId = item['id']
             )
             order.items.append(order_item)
-        db.session.add(order)
-        db.session.commit()
         session['cart'] = []
         session.modified = True
+        db.session.add(order)
+        db.session.commit()
         flash('Order submitted and recorded successfully', category='success')
+        return redirect(url_for('views.thankyou'))
 
 
     return render_template('checkout.html', form = form, grand_total = grand_total, tax_total=tax_total, grand_total_plus_tax = grand_total_plus_tax, SF_TAX_RATE = SF_TAX_RATE)
+
+
+@views.route('/thank-you')
+def thankyou():
+    return render_template('thankyou.html')
