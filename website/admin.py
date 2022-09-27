@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from sqlalchemy import inspect
 from . import db
 import os
-from .models import MenuCategory, Menu
+from .models import MenuCategory, Menu, Order
 from werkzeug.utils import secure_filename
 ALLOWED_EXTENSIONS = set(['jpeg','jpg','png','gif','JPEG','JPG','PNG','GIF'])
 
@@ -108,3 +108,8 @@ def manage_menu():
     menuitems = Menu.query.all()
 
     return render_template('manage_menu.html', menucategory=menucategory,menuitems=menuitems)
+
+@admin.route('/manage-order')
+def manage_order():
+    orders = Order.query.all()
+    return render_template('manage_order.html', orders=orders)

@@ -4,9 +4,9 @@ from flask_login import login_required, current_user
 from sqlalchemy import inspect
 from . import db 
 import json
-from .models import Note, MenuCategory, Menu
-from .forms import AddToCart
-
+from .models import Note, MenuCategory, Menu, Order, OrderDetail
+from .forms import AddToCart, Checkout
+import random
 
 # this is our blueprint, lots root and URL
 views = Blueprint('views',__name__) # keep this the same as the python file for easier convention
@@ -122,4 +122,38 @@ def cart():
 
 @views.route('/checkout', methods=['GET','POST'])
 def checkout():
-    return render_template('checkout.html')
+    added_items_detail, grand_total, quantity_total, tax_total, grand_total_plus_tax, SF_TAX_RATE = handle_cart()
+
+    form = Checkout()
+    print(f'this is first name from the form{form.first_name.data}')
+    print(f'this is email from the form{form.email.data}')
+    print('if we see first name and email, we are success')
+    if form.validate_on_submit():
+        print('form is validated')
+        order = Order()
+        order.reference = ''.join([random.choice('VWXYZ') for _ in range(5)])
+        order.status = 'RECEIVED'
+        print(f'the order status is : {order.status}')
+        order.first_name = form.first_name.data
+        order.last_name = form.last_name.data
+        order.phone_number = form.phone_number.data
+        order.email = form.email.data
+        order.card_number  = form.card_number
+        order.card_exp  = form.card_exp
+        order.card_secure_code  = form.card_secure_code
+        order.payment_type  = form.payment_type
+        order.pick_up_time  = form.pick_up_time
+
+        for item in added_items_detail:
+            order_item = OrderDetail(
+                qty = item['quantity'],ItemId = item['id']
+            )
+            order.items.append(order_item)
+        db.session.add(order)
+        db.session.commit()
+        session['cart'] = []
+        session.modified = True
+        flash('Order submitted and recorded successfully', category='success')
+
+
+    return render_template('checkout.html', form = form, grand_total = grand_total, tax_total=tax_total, grand_total_plus_tax = grand_total_plus_tax, SF_TAX_RATE = SF_TAX_RATE)

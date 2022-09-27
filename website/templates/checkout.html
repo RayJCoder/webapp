@@ -1,5 +1,123 @@
 {% extends 'layout.html' %}
-
+{% block head %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bs/css/flatly.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+{% endblock %}
 {% block body %}
-<p> this is the checkout page</p>
+<div class="row">
+	<div class="col-lg-8">
+		<h3 class="bold">
+			<i class="glyphicon glyphicon-pencil"></i> Shipping Information
+		</h3>
+
+		<div class="panel panel-primary">
+			<form method="POST" action="{{ url_for('views.checkout') }}">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<h4 class="bold">Personal Information</h4>
+					</div>
+					{{ form.csrf_token }}
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Firstname</label>
+							{{ form.first_name(class='form-control') }}
+						</div>
+						<div class="form-group">
+							<label>Lastname</label>
+							{{ form.last_name(class='form-control') }}
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Phone Number</label>
+							{{ form.phone_number(class='form-control') }}
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							{{ form.email(class='form-control') }}
+						</div>
+					</div>
+				</div>
+
+                <div class="row">
+					<div class="col-lg-12">
+						<h4 class="bold">Payment</h4>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Card Number</label>
+							{{ form.card_number(class='form-control') }}
+						</div>
+						<div class="form-group">
+							<label>Card Expiration</label>
+							{{ form.card_exp(class='form-control') }}
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Card Security Code</label>
+							{{ form.card_secure_code(class='form-control') }}
+						</div>
+						<div class="form-group">
+							<label>Payment Type</label>
+							{{ form.payment_type(class='form-control') }}
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<h4 class="bold">Pick Up Time</h4>
+					</div>
+					<div class="col-lg-6">
+						<div class="form-group">
+							<label>Payment Option</label>
+							{{ form.pick_up_time(class='form-control') }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-footer">
+				<button type="submit" class="btn btn-primary btn-sm">
+					Submit My Order
+				</button>
+			</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="col-lg-4">
+		<h3 class="bold">
+			<i class="glyphicon glyphicon-th-list"></i> Cart Summary
+		</h3>
+
+		<div class="panel panel-primary">
+			<div class="panel-body">
+				Current Cart Value
+			</div>
+			<ul class="list-group">
+                <li class="list-group-item">
+                    <p>
+                        {{ quantity_total }} Items <strong class="pull-right">&dollar;{{ grand_total }}</strong>
+                    </p>
+                </li>
+                <li class="list-group-item">
+                    <p>Tax({{SF_TAX_RATE * 100}}%) <strong class="pull-right">&dollar;{{ tax_total }}</strong></p>
+                </li>
+                <li class="list-group-item">
+                    <p>Total <strong class="pull-right">&dollar;{{ grand_total_plus_tax }}</strong></p>
+                </li>
+			</ul>
+		</div>
+
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">Thank you for your business!</h3>
+            </div>
+		</div>
+	</div>
+</div>
 {% endblock %}
