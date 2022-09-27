@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from . import db 
 from flask_login import UserMixin
 from sqlalchemy.sql import func
-
+from sqlalchemy.inspection import inspect
 class Note(db.Model):
     __tablename__ = "note"
     id = db.Column(db.Integer, primary_key=True)
@@ -21,7 +21,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     last_name = db.Column(db.String(150))
     notes = db.relationship("Note")
-    cart = db.relationship("Cart")
+    # order = db.relationship("Order")
 
 class Menu(db.Model):
     __tablename__ = "menu"
@@ -39,11 +39,31 @@ class MenuCategory(db.Model):
     category = db.Column(db.String(150),unique=True)
     category_cn = db.Column(db.String(150),unique=True)
 
-class Cart(db.Model):
-    __tablename__='cart'
+class Order(db.Model):
+    __tablename__='order'
     id = db.Column(db.Integer,primary_key = True)
+    reference = db.Column(db.String(5))
+    status = db.Column(db.String(20))
+    first_name = db.Column(db.String(20))
+    last_name = db.Column(db.String(20))
+    phone_number = db.Column(db.Integer)
+    email = db.Column(db.String(50))
+    pick_up_time = db.Column(db.String(20))
+    card_number = db.Column(db.String(50))
+    card_exp = db.Column(db.String(10))
+    card_secure_code = db.Column(db.String(10))
+    payment_type = db.Column(db.String(10))
+    items = db.relationship('OrderDetail', backref='order', lazy=True)
+    
+class OrderDetail(db.Model):
+    __tablename__='orderdetail'
+    id = db.Column(db.Integer,primary_key = True)
+    ItemId = db.Column(db.Integer, db.ForeignKey("menu.id"))
+    OrderId = db.Column(db.Integer, db.ForeignKey("order.id"))
     qty = db.Column(db.Integer)
-    UserID = db.Column(db.Integer, db.ForeignKey("user.id"))
-    ItemID = db.Column(db.Integer, db.ForeignKey("menu.id"))
 
+inspect_tb = inspect(OrderDetail)
+for c in inspect_tb.c:
+    print(c.name)
 
+db.Order.drop()
