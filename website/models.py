@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from . import db 
+from sqlalchemy import create_engine
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.inspection import inspect
@@ -39,8 +40,8 @@ class MenuCategory(db.Model):
     category = db.Column(db.String(150),unique=True)
     category_cn = db.Column(db.String(150),unique=True)
 
-class Order(db.Model):
-    __tablename__='order'
+class Orders(db.Model):
+    __tablename__='orders'
     id = db.Column(db.Integer,primary_key = True)
     reference = db.Column(db.String(5))
     status = db.Column(db.String(20))
@@ -53,17 +54,26 @@ class Order(db.Model):
     card_exp = db.Column(db.String(10))
     card_secure_code = db.Column(db.String(10))
     payment_type = db.Column(db.String(10))
-    items = db.relationship('OrderDetail', backref='order', lazy=True)
-    
+    items = db.relationship('OrderDetail', backref='orders', lazy=True)
+        
 class OrderDetail(db.Model):
     __tablename__='orderdetail'
     id = db.Column(db.Integer,primary_key = True)
     ItemId = db.Column(db.Integer, db.ForeignKey("menu.id"))
-    OrderId = db.Column(db.Integer, db.ForeignKey("order.id"))
+    OrderId = db.Column(db.Integer, db.ForeignKey("orders.id"))
     qty = db.Column(db.Integer)
+# DB_NAME = "database.db"
+# engine = create_engine(url=f'sqlite:///{DB_NAME}')
+# print(f'this is a new engine: {engine}')
 
-inspect_tb = inspect(OrderDetail)
-for c in inspect_tb.c:
-    print(c.name)
+# connection1 = engine.connect()
+# print(connection1)
+  
+# table_name = 'Order'
+  
+# query = f'{table_name};'
+# connection1.execute(query)
 
-db.Order.drop()
+# inspect_tb = inspect(Order)
+# for c in inspect_tb.c:
+#     print(c.name)

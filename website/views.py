@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from sqlalchemy import inspect
 from . import db 
 import json
-from .models import Note, MenuCategory, Menu, Order, OrderDetail
+from .models import Note, MenuCategory, Menu, Orders, OrderDetail
 from .forms import AddToCart, Checkout
 import random
 
@@ -104,7 +104,7 @@ def handle_cart():
     grand_total_plus_tax += (grand_total + tax_total)
 
 
-    return added_items_detail, grand_total, quantity_total, round(tax_total,2), round(grand_total_plus_tax,2), SF_TAX_RATE
+    return added_items_detail, round(grand_total,2), quantity_total, round(tax_total,2), round(grand_total_plus_tax,2), SF_TAX_RATE
 
 @views.route('/remove-from-cart/<index>')
 def remove_from_cart(index):
@@ -125,12 +125,9 @@ def checkout():
     added_items_detail, grand_total, quantity_total, tax_total, grand_total_plus_tax, SF_TAX_RATE = handle_cart()
 
     form = Checkout()
-    print(f'this is first name from the form{form.first_name.data}')
-    print(f'this is email from the form{form.email.data}')
-    print('if we see first name and email, we are success')
+
     if form.validate_on_submit():
-        print('form is validated')
-        order = Order()
+        order = Orders()
         order.reference = ''.join([random.choice('VWXYZ') for _ in range(5)])
         order.status = 'RECEIVED'
         print(f'the order status is : {order.status}')
@@ -138,11 +135,11 @@ def checkout():
         order.last_name = form.last_name.data
         order.phone_number = form.phone_number.data
         order.email = form.email.data
-        order.card_number  = form.card_number
-        order.card_exp  = form.card_exp
-        order.card_secure_code  = form.card_secure_code
-        order.payment_type  = form.payment_type
-        order.pick_up_time  = form.pick_up_time
+        order.card_number  = form.card_number.data
+        order.card_exp  = form.card_exp.data
+        order.card_secure_code  = form.card_secure_code.data
+        order.pick_up_time  = form.pick_up_time.data
+        order.payment_type = form.payment_type.data
 
         for item in added_items_detail:
             order_item = OrderDetail(

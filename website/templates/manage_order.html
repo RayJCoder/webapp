@@ -3,7 +3,7 @@
 {% block body %}
 
 <ul class="list-group list-group-flush" id="orders">
-    <h3>List of Categories</h3>
+    <h3>Customer Orders</h3>
     {% if orders %}
     {% for order in orders %}
     <li class="list-group-item">
@@ -19,7 +19,21 @@
         {{order.secure_code}}
         {{order.payment_type}}
         {{order.items}}
+        {{order.items[id]}}
+        {{order.items[OrderId]}}
+        
 
+
+    </li>
+    {% endfor %}
+
+    {% for detail in orderdetail %}
+
+    <li class="list-group-item">
+        {{detail.id}}
+        {{detail.ItemId}}
+        {{detail.OrderId}}
+        {{detail.qty}}
 
     </li>
     {% endfor %}
