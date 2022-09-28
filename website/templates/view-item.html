@@ -9,10 +9,11 @@
             <h3 class="panel-title">Item Details</h3>
         </div>
         <div class="panel-body">
-            <h3>{{ item.name }} &nbsp;
+            <h3>{{ item.item_name }} {{ item.item_name_cn }} &nbsp;
             </h3>
+            <img class="menu-item-image" src={{url_for('static', filename="menu-upload/" + item.image)}} alt=item.item_name/>
             <h4>&dollar;{{ item.price}}</h4>
-            <hr />
+
             {{ item.description }}
             <hr />
 
@@ -34,9 +35,12 @@
                 </div>
             </div>
         </div>
+        <hb />
+        <hr />
         <div class="panel-footer">
 
             <button type="submit" class="btn btn-primary">
+                <hb />
                 <i class="glyphicon glyphicon-shopping-cart"></i> Add To Cart
             </button>
 

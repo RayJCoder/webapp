@@ -151,6 +151,17 @@ def checkout():
         session['cart'] = []
         session.modified = True
         flash('Order submitted and recorded successfully', category='success')
+        return redirect(url_for('views.thankyou'))
 
 
     return render_template('checkout.html', form = form, grand_total = grand_total, tax_total=tax_total, grand_total_plus_tax = grand_total_plus_tax, SF_TAX_RATE = SF_TAX_RATE)
+
+
+@views.route('/thank-you')
+def thankyou():
+    return render_template('thankyou.html')
+
+
+@views.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
