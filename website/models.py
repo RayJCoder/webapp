@@ -1,9 +1,9 @@
-from dataclasses import dataclass
+
 from . import db 
-from sqlalchemy import create_engine
+
 from flask_login import UserMixin
 from sqlalchemy.sql import func
-from sqlalchemy.inspection import inspect
+
 class Note(db.Model):
     __tablename__ = "note"
     id = db.Column(db.Integer, primary_key=True)

@@ -160,8 +160,3 @@ def checkout():
 @views.route('/thank-you')
 def thankyou():
     return render_template('thankyou.html')
-
-
-@views.route('/gallery')
-def gallery():
-    return render_template('gallery.html')

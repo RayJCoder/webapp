@@ -81,3 +81,13 @@
     display:block;
     text-decoration: none;
 }
+.hourcenter{
+    margin-left:auto;
+    margin-right:auto;
+    font-size: large;
+    
+}
+
+.footerfont{
+    font-size: large;
+}

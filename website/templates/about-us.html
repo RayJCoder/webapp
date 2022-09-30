@@ -30,20 +30,197 @@
   </header>
 
 
-  <table class="table table-striped table table-bordered" style="width:300px; ">
-    <thead class="thead">
-      <th>Day</th>
-      <th>Hours</th>
-
-    </thead>
-    <tbody class="table table-striped">
-      <tr>
-        <td>Monday - Sunday</td>
-        <td>11:00 AM - 3:00 PM 5:00 PM - 9:30 PM</td>
-      </tr>
+<br/><hr/><br/>
+  <!-- Gallery -->
+  <h2 align="center">Gallery</h2>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        {% for i in range (1, 19) %}
+        <li data-target="#carouselExampleIndicators" data-slide-to={{i}}></li>
+      {% endfor %}
+      </ol>
+      <div class="carousel-inner">
+  
       
-    </tbody>
-  </table>
+  
+  <div class="carousel-item active">
+    <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'IMG_8507-1024x633.JPG')}}>
+    <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+      </div>
+  </div>
+  <div class="carousel-item ">
+  <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'C81-1024x684.JPG')}}>
+  <div class="carousel-caption d-none d-md-block">
+      <h5></h5>
+    </div>
+  </div>
+  <div class="carousel-item ">
+    <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'C1-1024x684.JPG')}}>
+    <div class="carousel-caption d-none d-md-block">
+        <h5></h5>
+      </div>
+    </div>
+  <div class="carousel-item ">
+  <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'G2-1024x684.JPG')}}>
+  <div class="carousel-caption d-none d-md-block">
+    <h5></h5>
+  </div>
+  </div>
+  <div class="carousel-item ">
+  <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'IMG_8420-1024x683.JPG')}}>
+  <div class="carousel-caption d-none d-md-block">
+    <h5></h5>
+  </div>
+  </div>
+  <div class="carousel-item ">
+  <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'IMG_8454-1024x631.JPG')}}>
+  <div class="carousel-caption d-none d-md-block">
+    <h5></h5>
+  </div>
+  </div>
+  <div class="carousel-item ">
+  <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'IMG_8526-1024x645.JPG')}}>
+  <div class="carousel-caption d-none d-md-block">
+    <h5></h5>
+  </div>
+  </div>
+  <div class="carousel-item ">
+  <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'IMG_8546-1024x633.JPG')}}>
+  <div class="carousel-caption d-none d-md-block">
+    <h5></h5>
+  </div>
+  </div>
+  
+  <div class="carousel-item ">
+  <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'IMG_8575-1024x611.JPG')}}>
+  <div class="carousel-caption d-none d-md-block">
+    <h5></h5>
+  </div>
+  </div>
+  <div class="carousel-item ">
+  <img class="d-block w-100" src={{url_for('static', filename="gallery-upload/" + 'IMG_8580-1024x683.JPG')}}>
+  <div class="carousel-caption d-none d-md-block">
+    <h5></h5>
+  </div>
+  </div>
+  
+  
+      <div class="carousel-item">
+        <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Chinese_Bath_Chap.JPG')}} alt="First slide">
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Chinese_Bath_Chap</h5>
+        </div>
+    </div>
+    <div class="carousel-item ">
+        <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Fried_Lamb_Chops_with_Cumin.JPG')}} alt="Fried_Lamb_Chops_with_Cumin">
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Fried_Lamb_Chops_with_Cumin</h5>
+          </div>
+    </div>
+    <div class="carousel-item ">
+        <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Fried_Tofu_with_Pepper_and_Salt.JPG')}} alt="Fried_Tofu_with_Pepper_and_Salt">
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Fried_Tofu_with_Pepper_and_Salt</h5>
+          </div>
+    </div>
+    <div class="carousel-item ">
+        <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Shredded_Pig_Ear_in_Chili_Sauce.JPG')}} alt="Shredded_Pig_Ear_in_Chili_Sauce">
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Shredded_Pig_Ear_in_Chili_Sauce</h5>
+          </div>
+    </div>
+    <div class="carousel-item ">
+        <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Stewed_Assorted_Meats_and_Vegetables.JPG')}} alt="Stewed_Assorted_Meats_and_Vegetables">
+        <div class="carousel-caption d-none d-md-block">
+            <h5>Stewed_Assorted_Meats_and_Vegetables</h5>
+          </div>
+    </div>
+    <div class="carousel-item ">
+      <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Stewed_Spare_Ribs_with_French_Bean.JPG')}} alt="Stewed_Spare_Ribs_with_French_Bean">
+      <div class="carousel-caption d-none d-md-block">
+          <h5>Stewed_Spare_Ribs_with_French_Bean</h5>
+        </div>
+  </div>
+  <div class="carousel-item ">
+      <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Toothpick_Lamb_with_Cumin.JPG')}} alt="Toothpick_Lamb_with_Cumin">
+      <div class="carousel-caption d-none d-md-block">
+          <h5>Toothpick_Lamb_with_Cumin</h5>
+        </div>
+  </div>
+  <div class="carousel-item ">
+      <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Tossed_Mung_Clear_Noodles_with_Homemade_Sauce.JPG')}} alt="Tossed_Mung_Clear_Noodles_with_Homemade_Sauce">
+      <div class="carousel-caption d-none d-md-block">
+          <h5>Tossed_Mung_Clear_Noodles_with_Homemade_Sauce</h5>
+        </div>
+  </div>
+  <div class="carousel-item ">
+      <img class="d-block w-100" src={{url_for('static', filename="menu-upload/" + 'Yu-Shiang_PorkSauteed_with_Spicy_Garlic_Sauce.JPG')}} alt="Yu-Shiang_PorkSauteed_with_Spicy_Garlic_Sauce">
+      <div class="carousel-caption d-none d-md-block">
+          <h5>Yu-Shiang_PorkSauteed_with_Spicy_Garlic_Sauce</h5>
+        </div>
+  </div>
+  
+  
+  
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+  </div>
+
+  
+
+<br/><hr/><br/>
+  <!-- embed a video  -->
+  <h2 align="center">About Us</h2>
+  <span align="center" class="border board-4">
+    <p class=" font-italic" >Northern Chinese cuisine, as a unique flavor genre, is famous for its unique connotation of the rough and thick taste of the northern nation.
+    </p>
+    <p class=" font-italic">
+      Rice is the main food, with dumplings, steamed buns, flower rolls, and various flatbreads as the staple food.
+      Pickled cabbage is also an indispensable dish on the table of Northeasterners who are warm and hospitable in the cold northern winter.
+      Northeastern cuisine with thick lines, not sticking to details, is quite like a bold Northeasterner, which is very appetizing.
+    </p>
+    <p class=" font-italic">
+      Northeastern cuisine is mainly stewed, with strong color and strong flavor.
+      Some Cooking methods are grilling, roasting, cooking, and blasting;
+      Pay attention to chef’s cooking experience and style; a dish with many flavors, a wide range of materials, and a clear distinction between salty and sweet.
+    </p>  
+  </span>
+
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/PUjMYD-tMa0;autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; muted; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+
+  <br/><hr/><br/>
+<table class="table table-striped table table-bordered text-center hourcenter" style="width:500px;font-size: large;">
+  <thead class="thead">
+    <th>Day</th>
+    <th>Hours</th>
+
+  </thead>
+  <h2 align="center">Hours of Operation</h2>
+  <tbody class="table table-striped">
+    <tr>
+      <td>Monday - Sunday</td>
+      <td>11:00 AM - 3:00 PM 5:00 PM - 9:30 PM</td>
+    </tr>
+  </tbody>
+
+  
+</table>
+<div align="center">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.407275588961!2d-122.47250828441645!3d37.780494079758554!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085871608972c25%3A0xcb2a7a194a8066f2!2s4737%20Geary%20Blvd%2C%20San%20Francisco%2C%20CA%2094118!5e0!3m2!1sen!2sus!4v1664503031101!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+<br/><br/>  <br/><br/>
+
 
 </div>
 {% endblock %}
