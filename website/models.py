@@ -3,16 +3,13 @@ from . import db
 
 from flask_login import UserMixin
 from sqlalchemy.sql import func
-
+from flask import session
 class Note(db.Model):
     __tablename__ = "note"
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-
-
-
 
 class User(db.Model, UserMixin):
     __tablename__ = "user"
@@ -62,18 +59,3 @@ class OrderDetail(db.Model):
     ItemId = db.Column(db.Integer, db.ForeignKey("menu.id"))
     OrderId = db.Column(db.Integer, db.ForeignKey("orders.id"))
     qty = db.Column(db.Integer)
-# DB_NAME = "database.db"
-# engine = create_engine(url=f'sqlite:///{DB_NAME}')
-# print(f'this is a new engine: {engine}')
-
-# connection1 = engine.connect()
-# print(connection1)
-  
-# table_name = 'Order'
-  
-# query = f'{table_name};'
-# connection1.execute(query)
-
-# inspect_tb = inspect(Order)
-# for c in inspect_tb.c:
-#     print(c.name)

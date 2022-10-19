@@ -3,39 +3,32 @@
 {% block body %}
 
 <ul class="list-group list-group-flush" id="orders">
-    <h3>Customer Orders</h3>
+
     {% if orders %}
     {% for order in orders %}
-    <li class="list-group-item">
-        {{order.id}}
-        {{order.reference}}
-        {{order.status}}
-        {{order.first_name}}
-        {{order.last_name}}
-        {{order.phone_number}}
-        {{order.email}}
-        {{order.pick_up_time}}
-        {{order.card_number}}
-        {{order.secure_code}}
-        {{order.payment_type}}
-        {{order.items}}
-        {{order.items[id]}}
-        {{order.items[OrderId]}}
-        
 
-
+    <h3>Order #: {{order.id}}</h3>
+    <div>
+    <li>Reference ID: {{order.reference}}</li>
+    <li>Order Status: {{order.status}}</li>
+    <h4><u>Customer Info:</u></h4>
+    <li>Name: {{order.first_name}} {{order.last_name}}
+        Cell: {{order.phone_number}}
+        Email: {{order.email}}
+        Pickup Time: {{order.pick_up_time}}
+        Payment Type: {{order.payment_type}}
     </li>
-    {% endfor %}
-
-    {% for detail in orderdetail %}
-
-    <li class="list-group-item">
-        {{detail.id}}
-        {{detail.ItemId}}
-        {{detail.OrderId}}
-        {{detail.qty}}
-
+    <h4><u>Order Detail</u></h4>
+        {% for o, od, m in q %}
+        {% if o.id == order.id%}
+        <li>{{m.item_name }}  *  {{od.qty}}</li>
+        {% endif %}
+        {% endfor %}
     </li>
+
+    </div>
+
+    <hr style="width:100%;margin-left:0;">
     {% endfor %}
     {% else %}
     <p>No orders to show</p>

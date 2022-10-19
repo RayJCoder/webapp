@@ -113,4 +113,6 @@ def manage_menu():
 def manage_order():
     orders = Orders.query.all()
     orderdetail = OrderDetail.query.all()
-    return render_template('manage_order.html', orders=orders, orderdetail = orderdetail)
+    q = db.session.query(Orders, OrderDetail, Menu).filter(Orders.id == OrderDetail.OrderId).filter(OrderDetail.ItemId == Menu.id).all()
+
+    return render_template('manage_order.html', orders=orders, orderdetail = orderdetail, q = q)

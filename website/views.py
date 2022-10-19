@@ -1,4 +1,3 @@
-from email.mime import image
 from flask import Blueprint, render_template, session, request, redirect, flash, jsonify, url_for, current_app
 from flask_login import login_required, current_user 
 from sqlalchemy import inspect
@@ -153,10 +152,10 @@ def checkout():
         flash('Order submitted and recorded successfully', category='success')
         return redirect(url_for('views.thankyou'))
 
-
     return render_template('checkout.html', form = form, grand_total = grand_total, tax_total=tax_total, grand_total_plus_tax = grand_total_plus_tax, SF_TAX_RATE = SF_TAX_RATE)
 
 
 @views.route('/thank-you')
 def thankyou():
     return render_template('thankyou.html')
+
