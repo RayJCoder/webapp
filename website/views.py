@@ -11,7 +11,7 @@ import random
 views = Blueprint('views',__name__) # keep this the same as the python file for easier convention
 
 @views.route('/', methods=['GET','POST'])
-@login_required
+# @login_required
 def note():
     if request.method == 'POST':
         note = request.form.get('note')
@@ -24,7 +24,7 @@ def note():
             db.session.commit()
             flash('Note added!', category='success')
 
-    return render_template("note.html", user=current_user)    
+    return render_template("about-us.html", user=current_user)    
 @views.route("/about-us")
 def about_us():
     return render_template("about-us.html")
